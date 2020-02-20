@@ -25,7 +25,7 @@ public class Libreria {
     public void setLibros(List<Integer> libros) {
         this.libros = libros;
     }
-    
+
 
     public int getTiempoRegistro() {
         return tiempoRegistro;
