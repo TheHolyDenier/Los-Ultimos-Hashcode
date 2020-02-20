@@ -6,10 +6,12 @@ import java.util.Scanner;
 public class Main {
     private static String rutaLectura = "Los-Ultimos-Hashcode/a_example.txt";
     private static String rutaEscritura = "output.txt";
-    private static List<Foto> lista;
+    private static Libreria[] lista;
     private static String divisor = " ";
     private static int numeroElementos;
     private static boolean sobrescritura = false;
+    private static int numeroLibros, numeroLibrerias, totalDias;
+    private static int[] scores;
 
     public static void main(String[] args) throws IOException {
         leerArchivo();
@@ -18,14 +20,32 @@ public class Main {
     }
 
     public static void leerArchivo() throws FileNotFoundException {
-        lista = new ArrayList<>();
+        Libreria libreria = null;
+        int libreriaNumero = 0;
         try (Scanner scanner = new Scanner(new File(rutaLectura))) {
             for (int i = 0; scanner.hasNextLine(); i++) {
                 String linea = scanner.nextLine();
                 if (i == 0) {
-                    numeroElementos = Integer.parseInt(linea);
-                } else {
-                    lista.add(new Foto(i-1, linea.split(divisor)));
+                    numeroLibros = Integer.parseInt(linea.split(divisor)[0]);
+                    numeroLibrerias = Integer.parseInt(linea.split(divisor)[1]);
+                    totalDias = Integer.parseInt(linea.split(divisor)[2]);
+                    lista = new Libreria[numeroLibrerias];
+                } else if (i == 1){
+                    scores = new int[linea.split(divisor).length];
+                    for (int j = 0; j < linea.split(divisor).length; j++){
+                        scores[j] = Integer.parseInt(linea.split(divisor)[j]);
+                    }
+                }else if (i % 2 == 0) {
+                        libreria = new Libreria();
+                        libreria.setNumero(libreriaNumero);
+                        libreriaNumero++;
+                        libreria.iniciarLibros(Integer.parseInt(linea.split(divisor)[0]));
+                        libreria.setTiempoRegistro(Integer.parseInt(linea.split(divisor)[1]));
+                        libreria.setLibrosPorDia(Integer.parseInt(linea.split(divisor)[2]));
+                    } else{
+                        libreria.addLibro(linea.split(divisor));
+                        lista[i] = libreria;
+                        libreria = null;
                 }
             }
         }
