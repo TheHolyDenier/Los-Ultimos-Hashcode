@@ -4,7 +4,6 @@ import java.util.List;
 public class Libreria {
     private int numero;
     private List<Integer> libros;
-    private int tiempo;
     private int librosPorDia;
     private int tiempoRegistro;
     private int enviasDia;
@@ -27,14 +26,7 @@ public class Libreria {
     public void setLibros(List<Integer> libros) {
         this.libros = libros;
     }
-
-    public int getTiempo() {
-        return tiempo;
-    }
-
-    public void setTiempo(int tiempo) {
-        this.tiempo = tiempo;
-    }
+    
 
     public int getLibrosPorDia() {
         return librosPorDia;
