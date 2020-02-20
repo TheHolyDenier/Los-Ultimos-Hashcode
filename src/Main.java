@@ -55,7 +55,7 @@ public class Main {
         printWriter.printf("%s\n", String.valueOf(numeroLibrerias));
         for (Libreria libreria : lista) {
             String registroLibros = libreria.getLibros().toString().replaceAll("[\\[\\], ]", " ");
-            registroLibros = registroLibros.substring(1, registroLibros.length()-1);
+            registroLibros = registroLibros.substring(1, registroLibros.length() - 1);
             printWriter.printf("%s %s\n%s\n", libreria.getNumero(), libreria.getLibros().size(), registroLibros);
         }
         printWriter.close();

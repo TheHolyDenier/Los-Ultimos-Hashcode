@@ -26,7 +26,7 @@ public class Libreria {
     public void setLibros(List<Integer> libros) {
         this.libros = libros;
     }
-    
+
 
     public int getLibrosPorDia() {
         return librosPorDia;
