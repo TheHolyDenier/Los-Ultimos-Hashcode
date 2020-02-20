@@ -41,7 +41,7 @@ public class Main {
                     libreria.setLibrosPorDia(Integer.parseInt(linea.split(divisor)[2]));
                 } else {
                     libreria.addLibro(linea.split(divisor));
-                    lista[i] = libreria;
+                    lista[libreriaNumero] = libreria;
                     libreria = null;
                 }
             }
