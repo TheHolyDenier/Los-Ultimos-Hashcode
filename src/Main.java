@@ -35,13 +35,13 @@ public class Main {
                 } else if (i % 2 == 0) {
                     libreria = new Libreria();
                     libreria.setNumero(libreriaNumero);
-                    libreriaNumero++;
                     libreria.iniciarLibros(Integer.parseInt(linea.split(divisor)[0]));
                     libreria.setTiempoRegistro(Integer.parseInt(linea.split(divisor)[1]));
                     libreria.setLibrosPorDia(Integer.parseInt(linea.split(divisor)[2]));
                 } else {
                     libreria.addLibro(linea.split(divisor));
                     lista[libreriaNumero] = libreria;
+                    libreriaNumero++;
                     libreria = null;
                 }
             }
@@ -54,7 +54,9 @@ public class Main {
         PrintWriter printWriter = new PrintWriter(fileWriter);
         printWriter.printf(String.valueOf(numeroLibrerias));
         for (Libreria libreria : lista) {
-            printWriter.printf("%s %s\n%s\n", libreria.getNumero(), libreria.getLibros().size(), String.join(", ", libreria.getLibros().toString()));
+            String registroLibros = libreria.getLibros().toString().replaceAll("[\\[\\], ]", " ");
+            registroLibros = registroLibros.substring(1, registroLibros.length()-1);
+            printWriter.printf("%s %s\n%s\n", libreria.getNumero(), libreria.getLibros().size(), registroLibros);
         }
         printWriter.close();
         if (new File(rutaEscritura).exists()) System.out.println("Archivo escrito");
