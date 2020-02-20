@@ -1,6 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -8,7 +6,6 @@ public class Main {
     private static String rutaEscritura = "output.txt";
     private static Libreria[] lista;
     private static String divisor = " ";
-    private static int numeroElementos;
     private static boolean sobrescritura = false;
     private static int numeroLibros, numeroLibrerias, totalDias;
     private static int[] scores;
@@ -30,22 +27,22 @@ public class Main {
                     numeroLibrerias = Integer.parseInt(linea.split(divisor)[1]);
                     totalDias = Integer.parseInt(linea.split(divisor)[2]);
                     lista = new Libreria[numeroLibrerias];
-                } else if (i == 1){
+                } else if (i == 1) {
                     scores = new int[linea.split(divisor).length];
-                    for (int j = 0; j < linea.split(divisor).length; j++){
+                    for (int j = 0; j < linea.split(divisor).length; j++) {
                         scores[j] = Integer.parseInt(linea.split(divisor)[j]);
                     }
-                }else if (i % 2 == 0) {
-                        libreria = new Libreria();
-                        libreria.setNumero(libreriaNumero);
-                        libreriaNumero++;
-                        libreria.iniciarLibros(Integer.parseInt(linea.split(divisor)[0]));
-                        libreria.setTiempoRegistro(Integer.parseInt(linea.split(divisor)[1]));
-                        libreria.setLibrosPorDia(Integer.parseInt(linea.split(divisor)[2]));
-                    } else{
-                        libreria.addLibro(linea.split(divisor));
-                        lista[i] = libreria;
-                        libreria = null;
+                } else if (i % 2 == 0) {
+                    libreria = new Libreria();
+                    libreria.setNumero(libreriaNumero);
+                    libreriaNumero++;
+                    libreria.iniciarLibros(Integer.parseInt(linea.split(divisor)[0]));
+                    libreria.setTiempoRegistro(Integer.parseInt(linea.split(divisor)[1]));
+                    libreria.setLibrosPorDia(Integer.parseInt(linea.split(divisor)[2]));
+                } else {
+                    libreria.addLibro(linea.split(divisor));
+                    lista[i] = libreria;
+                    libreria = null;
                 }
             }
         }
@@ -55,9 +52,9 @@ public class Main {
     public static void escribirArchivo() throws IOException {
         FileWriter fileWriter = new FileWriter(rutaEscritura, sobrescritura);
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.printf("The collection has %s photos\n", numeroElementos);
-        for (Foto linea : lista) {
-            printWriter.printf("%s\n", linea.toString());
+        printWriter.printf(String.valueOf(numeroLibrerias));
+        for (Libreria libreria : lista) {
+            printWriter.printf("%s %s\n%s\n", libreria.getNumero(), libreria.getLibros().size(), String.join(", ", libreria.getLibros().toString()));
         }
         printWriter.close();
         if (new File(rutaEscritura).exists()) System.out.println("Archivo escrito");
