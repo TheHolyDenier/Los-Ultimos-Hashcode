@@ -52,7 +52,7 @@ public class Main {
     public static void escribirArchivo() throws IOException {
         FileWriter fileWriter = new FileWriter(rutaEscritura, sobrescritura);
         PrintWriter printWriter = new PrintWriter(fileWriter);
-        printWriter.printf("%s\n", String.valueOf(numeroLibrerias));
+        printWriter.printf("%s\n", lista.length); //TODO: cambiar por el objeto que sea
         for (Libreria libreria : lista) {
             String registroLibros = libreria.getLibros().toString().replaceAll("[\\[\\], ]", " ");
             registroLibros = registroLibros.substring(1, registroLibros.length() - 1);
